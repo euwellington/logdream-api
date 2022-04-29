@@ -24,16 +24,6 @@ class EnderecoController
         try { 
             let id = req.params.id;
             const retorno = await EnderecoModel.getByEquipamentoFk(id);
-            let object: Endereco =
-                {
-                    id: retorno.id,
-                    equipamentoId: retorno.equipamentoId,
-                    estado: retorno.estado,
-                    cidade: retorno.cidade,
-                    bairro: retorno.bairro,
-                    endereco: retorno.endereco,
-                    obs: retorno.cidade
-                }
             res.status(200)
             .json(retorno); 
         } catch (e: any) {

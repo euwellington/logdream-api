@@ -27,7 +27,7 @@ class EnderecoRepository
     {
         try {
             let retorno = await this.query(script.SelecionarEnderecoPorEquipamentoId(equipamentoId));
-            return retorno[0] as Endereco;
+            return retorno[0] as Endereco[];
         } catch (err: any) {
             throw new Error(err.message)
         }
@@ -50,7 +50,7 @@ class EnderecoRepository
     {
         try {
             let retorno = await this.query(script.SelecionarEnderecoPorId(enderecoId));
-            return retorno;
+            return retorno as Endereco[];
         } catch (err: any) {
             throw new Error(err.message)
         }

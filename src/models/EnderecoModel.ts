@@ -20,7 +20,7 @@ EnderecoModel.getByPk = async (enderecoId: string)=>
 {
     try {     
         const retorno = await EnderecoRepository.SelecionarEnderecoPorId(enderecoId);
-        return retorno;
+        return retorno[0];
     } catch (err: any) {
         throw err.message;
     }
@@ -30,7 +30,7 @@ EnderecoModel.getByEquipamentoFk = async (equipamentoId: string) =>
 {
     try {     
         const retorno = await EnderecoRepository.ListarEnderecosPorEquipamentoId(equipamentoId);
-        return retorno;
+        return retorno[0];
     } catch (err: any) {
         throw err.message;
     }
