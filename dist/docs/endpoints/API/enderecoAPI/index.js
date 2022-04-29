@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deleteAPIEndereco = exports.updateAPIEndereco = exports.postAPIEndereco = exports.getByEquipamentoFkEndereco = exports.getByPkEndereco = exports.getAllAPIEndereco = void 0;
+const getAll_1 = require("./getAll");
+Object.defineProperty(exports, "getAllAPIEndereco", { enumerable: true, get: function () { return getAll_1.getAllAPIEndereco; } });
+const getByPk_1 = require("./getByPk");
+Object.defineProperty(exports, "getByPkEndereco", { enumerable: true, get: function () { return getByPk_1.getByPkEndereco; } });
+const getByEquipamentoFk_1 = require("./getByEquipamentoFk");
+Object.defineProperty(exports, "getByEquipamentoFkEndereco", { enumerable: true, get: function () { return getByEquipamentoFk_1.getByEquipamentoFkEndereco; } });
+const post_1 = require("./post");
+Object.defineProperty(exports, "postAPIEndereco", { enumerable: true, get: function () { return post_1.postAPIEndereco; } });
+const update_1 = require("./update");
+Object.defineProperty(exports, "updateAPIEndereco", { enumerable: true, get: function () { return update_1.updateAPIEndereco; } });
+const delete_1 = require("./delete");
+Object.defineProperty(exports, "deleteAPIEndereco", { enumerable: true, get: function () { return delete_1.deleteAPIEndereco; } });

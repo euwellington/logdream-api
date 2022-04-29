@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getByEquipamentoFkEvento = exports.getByPkEvento = exports.deleteAPIEvento = exports.postAPIEvento = exports.getAllAPIEvento = void 0;
+const getAll_1 = require("./getAll");
+Object.defineProperty(exports, "getAllAPIEvento", { enumerable: true, get: function () { return getAll_1.getAllAPIEvento; } });
+const post_1 = require("./post");
+Object.defineProperty(exports, "postAPIEvento", { enumerable: true, get: function () { return post_1.postAPIEvento; } });
+const delete_1 = require("./delete");
+Object.defineProperty(exports, "deleteAPIEvento", { enumerable: true, get: function () { return delete_1.deleteAPIEvento; } });
+const getByPk_1 = require("./getByPk");
+Object.defineProperty(exports, "getByPkEvento", { enumerable: true, get: function () { return getByPk_1.getByPkEvento; } });
+const getByEquipamentoFk_1 = require("./getByEquipamentoFk");
+Object.defineProperty(exports, "getByEquipamentoFkEvento", { enumerable: true, get: function () { return getByEquipamentoFk_1.getByEquipamentoFkEvento; } });

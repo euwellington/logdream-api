@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deleteAPINota = exports.updateAPINota = exports.postAPINota = exports.getByEquipamentoFkNota = exports.getByPkNota = exports.getAllAPINota = void 0;
+const getAll_1 = require("./getAll");
+Object.defineProperty(exports, "getAllAPINota", { enumerable: true, get: function () { return getAll_1.getAllAPINota; } });
+const getByPk_1 = require("./getByPk");
+Object.defineProperty(exports, "getByPkNota", { enumerable: true, get: function () { return getByPk_1.getByPkNota; } });
+const getByEquipamentoFk_1 = require("./getByEquipamentoFk");
+Object.defineProperty(exports, "getByEquipamentoFkNota", { enumerable: true, get: function () { return getByEquipamentoFk_1.getByEquipamentoFkNota; } });
+const post_1 = require("./post");
+Object.defineProperty(exports, "postAPINota", { enumerable: true, get: function () { return post_1.postAPINota; } });
+const update_1 = require("./update");
+Object.defineProperty(exports, "updateAPINota", { enumerable: true, get: function () { return update_1.updateAPINota; } });
+const delete_1 = require("./delete");
+Object.defineProperty(exports, "deleteAPINota", { enumerable: true, get: function () { return delete_1.deleteAPINota; } });

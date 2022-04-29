@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getByFkEquipamentoAPIAcionamento = exports.deleteAPIAcionamento = exports.updateAPIAcionamento = exports.postAPIAcionamento = exports.acionarAPIAcionamento = exports.getByPkAPIAcionamento = exports.getAllAPIAcionamento = void 0;
+const getAll_1 = require("./getAll");
+Object.defineProperty(exports, "getAllAPIAcionamento", { enumerable: true, get: function () { return getAll_1.getAllAPIAcionamento; } });
+const getByPk_1 = require("./getByPk");
+Object.defineProperty(exports, "getByPkAPIAcionamento", { enumerable: true, get: function () { return getByPk_1.getByPkAPIAcionamento; } });
+const getByEquipamentoFk_1 = require("./getByEquipamentoFk");
+Object.defineProperty(exports, "getByFkEquipamentoAPIAcionamento", { enumerable: true, get: function () { return getByEquipamentoFk_1.getByFkEquipamentoAPIAcionamento; } });
+const acionar_1 = require("./acionar");
+Object.defineProperty(exports, "acionarAPIAcionamento", { enumerable: true, get: function () { return acionar_1.acionarAPIAcionamento; } });
+const post_1 = require("./post");
+Object.defineProperty(exports, "postAPIAcionamento", { enumerable: true, get: function () { return post_1.postAPIAcionamento; } });
+const update_1 = require("./update");
+Object.defineProperty(exports, "updateAPIAcionamento", { enumerable: true, get: function () { return update_1.updateAPIAcionamento; } });
+const delete_1 = require("./delete");
+Object.defineProperty(exports, "deleteAPIAcionamento", { enumerable: true, get: function () { return delete_1.deleteAPIAcionamento; } });
