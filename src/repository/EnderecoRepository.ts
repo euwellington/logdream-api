@@ -27,7 +27,7 @@ class EnderecoRepository
     {
         try {
             let retorno = await this.query(script.SelecionarEnderecoPorEquipamentoId(equipamentoId));
-            return retorno[0] as Endereco[];
+            return retorno as Endereco[];
         } catch (err: any) {
             throw new Error(err.message)
         }
