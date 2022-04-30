@@ -17,7 +17,7 @@ UsuarioModel.login = async (email: string, senha: string) =>
         if(user && (await compare(senha, user.senha)))
         {
             const token = jwt.sign(
-                { user: user.id },
+                { user: user },
                 SECRET.token
             );
             return token;
