@@ -71,7 +71,7 @@ AcionamentoModel.getAll = () => __awaiter(void 0, void 0, void 0, function* () {
 AcionamentoModel.getByPk = (acionamentoId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const retorno = yield AcionamentoRepository_1.default.SelecionarAcionamentoPorId(acionamentoId);
-        return retorno;
+        return retorno[0];
     }
     catch (err) {
         throw err.message;

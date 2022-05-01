@@ -22,17 +22,13 @@ app.use(cors());
 app.use(express.urlencoded())
 app.use(express.json())
 
-app.get('/', (req, res) =>
-{
-  res.json({
-    status: `on`
-  })
-});
-
-app.all('/*', (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+app.use((req, res, next) => {
+	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+	//Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
 });
 
 const options = {
@@ -44,7 +40,7 @@ const options = {
   };
 
 app.use(
-    '/api/doc',
+    '/',
     serve,
     setup(docs, options)
 );  

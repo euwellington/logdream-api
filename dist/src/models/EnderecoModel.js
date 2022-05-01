@@ -27,7 +27,7 @@ EnderecoModel.getAll = () => __awaiter(void 0, void 0, void 0, function* () {
 EnderecoModel.getByPk = (enderecoId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const retorno = yield EnderecoRepository_1.default.SelecionarEnderecoPorId(enderecoId);
-        return retorno;
+        return retorno[0];
     }
     catch (err) {
         throw err.message;
@@ -36,7 +36,7 @@ EnderecoModel.getByPk = (enderecoId) => __awaiter(void 0, void 0, void 0, functi
 EnderecoModel.getByEquipamentoFk = (equipamentoId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const retorno = yield EnderecoRepository_1.default.ListarEnderecosPorEquipamentoId(equipamentoId);
-        return retorno;
+        return retorno[0];
     }
     catch (err) {
         throw err.message;

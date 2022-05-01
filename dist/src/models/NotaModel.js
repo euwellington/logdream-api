@@ -28,7 +28,7 @@ NotaModel.getAll = () => __awaiter(void 0, void 0, void 0, function* () {
 NotaModel.getByPk = (notaId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const retorno = yield NotaRepository_1.default.SelecionarNotaPorId(notaId);
-        return retorno;
+        return retorno[0];
     }
     catch (err) {
         throw err.message;
