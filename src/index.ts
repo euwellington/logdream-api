@@ -39,6 +39,7 @@ const options = {
     customCssUrl: 'https://raw.githubusercontent.com/ostranme/swagger-ui-themes/develop/themes/3.x/theme-newspaper.css',
   };
 
+// VAI CONTINUAR COM ESSA ROTA
 app.use(
     '/api/doc',
     serve,
