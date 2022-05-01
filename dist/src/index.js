@@ -23,14 +23,12 @@ const httpServer = http_1.default.createServer(app);
 app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded());
 app.use(express_1.default.json());
-app.get('/', (req, res) => {
-    res.json({
-        status: `on`
-    });
-});
-app.all('/*', (req, res, next) => {
+app.use((req, res, next) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use((0, cors_1.default)());
     next();
 });
 const options = {
@@ -40,7 +38,7 @@ const options = {
     },
     customCssUrl: 'https://raw.githubusercontent.com/ostranme/swagger-ui-themes/develop/themes/3.x/theme-newspaper.css',
 };
-app.use('/api/doc', swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(docs_1.docs, options));
+app.use('/', swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(docs_1.docs, options));
 app.use(`/api/auth`, Auth_1.routes_auth);
 app.use(`/api/usuario`, Usuario_1.routes_usuario);
 app.use(`/api/evento`, Eventos_1.routes_eventos);

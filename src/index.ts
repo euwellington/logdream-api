@@ -40,7 +40,7 @@ const options = {
   };
 
 app.use(
-    '/',
+    '/api/doc',
     serve,
     setup(docs, options)
 );  
