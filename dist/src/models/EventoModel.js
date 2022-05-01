@@ -28,7 +28,7 @@ EventoModel.getAll = () => __awaiter(void 0, void 0, void 0, function* () {
 EventoModel.getByPk = (eventoId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const retorno = yield EventoRepository_1.default.SelecionarEventoPorId(eventoId);
-        return retorno;
+        return retorno[0];
     }
     catch (err) {
         throw err.message;

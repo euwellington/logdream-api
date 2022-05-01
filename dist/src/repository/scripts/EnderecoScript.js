@@ -17,8 +17,9 @@ class EnderecoScript {
                 (
                     id,
                     equipamentoId,
-                    endereco,
+                    estado,
                     cidade,
+                    endereco,
                     bairro,
                     obs
                 )
@@ -26,6 +27,7 @@ class EnderecoScript {
                 (
                     '${endereco.id}',
                     '${endereco.equipamentoId}',
+                    '${endereco.estado}',
                     '${endereco.endereco}',
                     '${endereco.cidade}',
                     '${endereco.bairro}',
@@ -61,6 +63,7 @@ class EnderecoScript {
             UPDATE 
                 enderecos
             SET
+                estado = '${endereco.estado}',
                 endereco = '${endereco.endereco}',
                 cidade = '${endereco.cidade}',
                 bairro = '${endereco.bairro}',

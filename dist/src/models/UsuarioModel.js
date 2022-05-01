@@ -24,7 +24,7 @@ UsuarioModel.login = (email, senha) => __awaiter(void 0, void 0, void 0, functio
         const retorno = yield UsuarioRepository_1.default.Login();
         let user = retorno.find((usr) => usr.email === email);
         if (user && (yield (0, bcryptjs_1.compare)(senha, user.senha))) {
-            const token = jsonwebtoken_1.default.sign({ user: user.id }, env_1.SECRET.token);
+            const token = jsonwebtoken_1.default.sign({ user: user }, env_1.SECRET.token);
             return token;
         }
         throw 'Usuário náo encontrado!';

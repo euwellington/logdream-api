@@ -5,7 +5,7 @@ const getByEquipamentoFkUsuario = {
     get: {
         tags: ['Usuario'],
         description: "listar usuario por id",
-        operationId: 'listarUsuariroPorId',
+        operationId: 'listarUsuariroPorEquipamentoId',
         parameters: [
             {
                 name: "id",

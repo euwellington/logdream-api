@@ -61,7 +61,7 @@ class NotaScript {
             UPDATE 
                 notas
             SET
-            descricao = '${nota.descricao}'
+                descricao = '${nota.descricao}'
             WHERE
                 id = '${nota.id}'
         `;
