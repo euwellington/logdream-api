@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; 
-import PostModel from '../models/UsuarioModel';
+import UsuarioService from '../services/UsuarioService';
 import { Usuario } from '../interface/UsuarioInterface';
 
 class UsuarioController
@@ -8,7 +8,7 @@ class UsuarioController
     {
         try {
             const { email, senha } = req.body;            
-            const retorno = await PostModel.login(email, senha);
+            const retorno = await UsuarioService.login(email, senha);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +24,7 @@ class UsuarioController
     public async ListarUsuarios(req: Request, res: Response)
     {
         try { 
-            const retorno = await PostModel.getAll();
+            const retorno = await UsuarioService.getAll();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -40,7 +40,7 @@ class UsuarioController
     {
         try { 
             let id = req.params.id;
-            const retorno = await PostModel.getByEquipamentoFk(id);
+            const retorno = await UsuarioService.getByEquipamentoFk(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -56,7 +56,7 @@ class UsuarioController
     {
         try { 
             let id = req.params.id;
-            const retorno: any = await PostModel.getByPk(id);
+            const retorno: any = await UsuarioService.getByPk(id);
             res.status(200)
             .json(retorno[0]);
         } catch (e: any) {
@@ -72,7 +72,7 @@ class UsuarioController
     {
         try { 
             const usuario = <Usuario>req.body;
-            const retorno = await PostModel.create(usuario);
+            const retorno = await UsuarioService.create(usuario);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -89,7 +89,7 @@ class UsuarioController
     {
         try { 
             const usuario = <Usuario>req.body;
-            const retorno = await PostModel.update(usuario);
+            const retorno = await UsuarioService.update(usuario);
             res.status(200)
             .json({
                 message: 'Usuário atualizado com sucesso',
@@ -109,7 +109,7 @@ class UsuarioController
     {
         try { 
             const id = req.params.id;
-            const retorno = await PostModel.delete(id);
+            const retorno = await UsuarioService.delete(id);
             res.status(200)
             .json({
                 message: 'Usuário deletado com sucesso',

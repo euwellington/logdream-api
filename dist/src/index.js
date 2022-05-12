@@ -38,7 +38,8 @@ const options = {
     },
     customCssUrl: 'https://raw.githubusercontent.com/ostranme/swagger-ui-themes/develop/themes/3.x/theme-newspaper.css',
 };
-app.use('/', swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(docs_1.docs, options));
+// VAI CONTINUAR COM ESSA ROTA
+app.use('/api/doc', swagger_ui_express_1.serve, (0, swagger_ui_express_1.setup)(docs_1.docs, options));
 app.use(`/api/auth`, Auth_1.routes_auth);
 app.use(`/api/usuario`, Usuario_1.routes_usuario);
 app.use(`/api/evento`, Eventos_1.routes_eventos);

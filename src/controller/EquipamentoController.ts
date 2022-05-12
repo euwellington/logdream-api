@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; 
-import EquipamentoModel from '../models/EquipamentoModel';
+import EquipamentoService from '../services/EquipamentoService';
 import { Equipamento } from '../interface/EquipamentoInterface';
 
 class EquipamentoController
@@ -8,7 +8,7 @@ class EquipamentoController
     public async ListarEquipamentos(req: Request, res: Response)
     {
         try { 
-            const retorno = await EquipamentoModel.getAll();
+            const retorno = await EquipamentoService.getAll();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +24,7 @@ class EquipamentoController
     {
         try { 
             let id = req.params.id;
-            const retorno: any = await EquipamentoModel.getByPk(id);
+            const retorno: any = await EquipamentoService.getByPk(id);
             res.status(200)
             .json(retorno[0]);
         } catch (e: any) {
@@ -40,7 +40,7 @@ class EquipamentoController
     {
         try { 
             const equipamento = <Equipamento>req.body;
-            const retorno = await EquipamentoModel.create(equipamento);
+            const retorno = await EquipamentoService.create(equipamento);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -57,7 +57,7 @@ class EquipamentoController
     {
         try { 
             const equipamento = <Equipamento>req.body;
-            const retorno = await EquipamentoModel.update(equipamento);
+            const retorno = await EquipamentoService.update(equipamento);
             res.status(200)
             .json({
                 message: 'Equipamento atualizado com sucesso',
@@ -77,7 +77,7 @@ class EquipamentoController
     {
         try { 
             const id = req.params.id;
-            const retorno = await EquipamentoModel.delete(id);
+            const retorno = await EquipamentoService.delete(id);
             res.status(200)
             .json({
                 message: 'Equipamento deletado com sucesso',

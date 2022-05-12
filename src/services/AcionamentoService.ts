@@ -3,8 +3,8 @@ import AcionamentoRepository from '../repository/AcionamentoRepository';
 import { v4 } from 'uuid';
 import { Acionamento, AcionamentoRequest } from '../interface/AcionamentoInterface';
 import { converterDataHora } from '../utils/masks';
-import { enviaAcionamento } from '../services/mqtt/pub';
-import EventoModel from './EventoModel';
+import { enviaAcionamento } from '../services_/mqtt/pub';
+import EventoService from './EventoService';
 
 var AcionamentoModel = {} as AcionamentoEntities;
 
@@ -17,7 +17,7 @@ AcionamentoModel.acionar = async (acionamentoId: string, usuarioId: string, flag
         {
             let buffer = acionamentoState.estado ? false : true;
             enviaAcionamento(acionamentoState!.topic, String(buffer));
-            EventoModel.create({
+            EventoService.create({
                 id: '',
                 acionamentoId: acionamentoState.id,
                 equipamentoId: acionamentoState.equipamentoId,
@@ -43,7 +43,7 @@ AcionamentoModel.acionar = async (acionamentoId: string, usuarioId: string, flag
         }
         else if(acionamentoState?.tipo === 1)
         {
-            EventoModel.create({
+            EventoService.create({
                 id: '',
                 acionamentoId: acionamentoState.id,
                 equipamentoId: acionamentoState.equipamentoId,
@@ -135,3 +135,4 @@ AcionamentoModel.delete = async (acionamentoId: string) =>
 }
 
 export default AcionamentoModel;
+

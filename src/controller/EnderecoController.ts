@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; 
-import EnderecoModel from '../models/EnderecoModel';
+import EnderecoService from '../services/EnderecoService';
 import { Endereco } from '../interface/EnderecoInterface';
 
 class EnderecoController
@@ -7,7 +7,7 @@ class EnderecoController
     public async ListarEnderecos(req: Request, res: Response)
     {
         try { 
-            const retorno = await EnderecoModel.getAll();
+            const retorno = await EnderecoService.getAll();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -23,7 +23,7 @@ class EnderecoController
     {
         try { 
             let id = req.params.id;
-            const retorno = await EnderecoModel.getByEquipamentoFk(id);
+            const retorno = await EnderecoService.getByEquipamentoFk(id);
             res.status(200)
             .json(retorno); 
         } catch (e: any) {
@@ -39,7 +39,7 @@ class EnderecoController
     {
         try { 
             let id = req.params.id;
-            const retorno: any = await EnderecoModel.getByPk(id);
+            const retorno: any = await EnderecoService.getByPk(id);
             res.status(200)
             .json(retorno[0]);
         } catch (e: any) {
@@ -55,7 +55,7 @@ class EnderecoController
     {
         try { 
             const endereco = req.body;
-            const retorno = await EnderecoModel.create(endereco);
+            const retorno = await EnderecoService.create(endereco);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -72,7 +72,7 @@ class EnderecoController
     {
         try { 
             const endereco = req.body;
-            const retorno = await EnderecoModel.update(endereco);
+            const retorno = await EnderecoService.update(endereco);
             res.status(200)
             .json({
                 message: 'Endereco atualizado com sucesso',
@@ -92,7 +92,7 @@ class EnderecoController
     {
         try { 
             const id = req.params.id;
-            const retorno = await EnderecoModel.delete(id);
+            const retorno = await EnderecoService.delete(id);
             res.status(200)
             .json({
                 message: 'Endereco deletado com sucesso',

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; 
-import NotaModel from '../models/NotaModel';
+import NotaService from '../services/NotaService';
 import { Nota } from '../interface/NotaInterface';
 
 class NotaController
@@ -8,7 +8,7 @@ class NotaController
     public async ListarNotas(req: Request, res: Response)
     {
         try { 
-            const retorno = await NotaModel.getAll();
+            const retorno = await NotaService.getAll();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +24,7 @@ class NotaController
     {
         try { 
             let id = req.params.id;
-            const retorno = await NotaModel.getByEquipamentoFk(id);
+            const retorno = await NotaService.getByEquipamentoFk(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -40,7 +40,7 @@ class NotaController
     {
         try { 
             let id = req.params.id;
-            const retorno = await NotaModel.getByPk(id);
+            const retorno = await NotaService.getByPk(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -56,7 +56,7 @@ class NotaController
     {
         try { 
             const nota = req.body;
-            const retorno = await NotaModel.create(nota);
+            const retorno = await NotaService.create(nota);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -73,7 +73,7 @@ class NotaController
     {
         try { 
             const nota = req.body;
-            const retorno = await NotaModel.update(nota);
+            const retorno = await NotaService.update(nota);
             res.status(200)
             .json({
                 message: 'Nota atualizado com sucesso',
@@ -93,7 +93,7 @@ class NotaController
     {
         try { 
             const id = req.params.id;
-            const retorno = await NotaModel.delete(id);
+            const retorno = await NotaService.delete(id);
             res.status(200)
             .json({
                 message: 'Nota deletado com sucesso',

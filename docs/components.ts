@@ -27,28 +27,29 @@ const Components =
                     id:
                     {
                         type:'string',
+                        required: true
                         // description:"Todo identification number",
-                        example:'423e37e8-886e-4fb6-8095-d243af2d0fc9'
+                        // example:'423e37e8-886e-4fb6-8095-d243af2d0fc9'
                     },
                     usuarioId:
                     {
                         type:'string',
-                        example:'423e37e8-886e-4fb6-8095-d243af2d0fc9'
+                        // example:'423e37e8-886e-4fb6-8095-d243af2d0fc9'
                     },
                     equipamentoId:
                     {   
                         type: 'string',
-                        example: '423e37e8-886e-4fb6-8095-d243af2d0fc9'
+                        // example: '423e37e8-886e-4fb6-8095-d243af2d0fc9'
                     },
                     acionamentoId:
                     {   
                         type: 'string',
-                        example: '423e37e8-886e-4fb6-8095-d243af2d0fc9'
+                        // example: '423e37e8-886e-4fb6-8095-d243af2d0fc9'
                     },
                     dataHora:
                     {   
                         type: 'string',
-                        example: '2021-10-10 13:50:24'
+                        // example: '2021-10-10 13:50:24'
                     }
                 }
             },

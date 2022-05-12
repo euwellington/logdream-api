@@ -1,6 +1,6 @@
 import { Equipamento } from "../../interface/EquipamentoInterface";
 
-export type EquipamentoEntities = 
+export interface EquipamentoEntities
 {
     getAll: () => void;
     getByPk: (equipamentoId: string) => void;
