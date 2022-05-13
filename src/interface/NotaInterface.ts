@@ -4,7 +4,7 @@ export interface Nota
     equipamentoId: string;
     usuarioId: string;
     descricao: string;
-    dataHora: string;
+    dataHora: Date;
     tipo: number;
 };
 

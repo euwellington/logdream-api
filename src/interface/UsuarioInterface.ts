@@ -7,7 +7,7 @@ export interface Usuario
     email: string;
     nascimento: Date;
     senha: string;
-    dataCadastro: string;
+    dataCadastro: Date;
 };
 
 export interface UsuarioRequest extends Partial<Usuario> {};

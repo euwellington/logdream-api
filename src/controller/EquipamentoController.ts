@@ -8,7 +8,7 @@ class EquipamentoController
     public async ListarEquipamentos(req: Request, res: Response)
     {
         try { 
-            const retorno = await EquipamentoService.getAll();
+            const retorno = await EquipamentoService.Listar();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +24,7 @@ class EquipamentoController
     {
         try { 
             let id = req.params.id;
-            const retorno: any = await EquipamentoService.getByPk(id);
+            const retorno: any = await EquipamentoService.SelecionarPorId(id);
             res.status(200)
             .json(retorno[0]);
         } catch (e: any) {
@@ -40,7 +40,7 @@ class EquipamentoController
     {
         try { 
             const equipamento = <Equipamento>req.body;
-            const retorno = await EquipamentoService.create(equipamento);
+            const retorno = await EquipamentoService.Cadastrar(equipamento);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -57,7 +57,7 @@ class EquipamentoController
     {
         try { 
             const equipamento = <Equipamento>req.body;
-            const retorno = await EquipamentoService.update(equipamento);
+            const retorno = await EquipamentoService.Atualizar(equipamento);
             res.status(200)
             .json({
                 message: 'Equipamento atualizado com sucesso',
@@ -77,7 +77,7 @@ class EquipamentoController
     {
         try { 
             const id = req.params.id;
-            const retorno = await EquipamentoService.delete(id);
+            const retorno = await EquipamentoService.Deletar(id);
             res.status(200)
             .json({
                 message: 'Equipamento deletado com sucesso',

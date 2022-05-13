@@ -10,7 +10,7 @@ import { routes_usuario } from './routes/Usuario';
 import { routes_eventos } from './routes/Eventos';
 import { routes_acionamentos } from './routes/Acionamento';
 import { routes_mqtt } from './routes/Mqtt';
-import { log } from './services_/mqtt/sub'
+import { log } from './services/mqtt/sub'
 import { routes_equipamentos } from './routes/Equipamento';
 import { converterDataHora } from './utils/masks';
 import { routes_notas } from './routes/Nota';

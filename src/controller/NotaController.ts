@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'; 
 import NotaService from '../services/NotaService';
-import { Nota } from '../interface/NotaInterface';
 
 class NotaController
 {
@@ -8,7 +7,7 @@ class NotaController
     public async ListarNotas(req: Request, res: Response)
     {
         try { 
-            const retorno = await NotaService.getAll();
+            const retorno = await NotaService.Listar();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +23,7 @@ class NotaController
     {
         try { 
             let id = req.params.id;
-            const retorno = await NotaService.getByEquipamentoFk(id);
+            const retorno = await NotaService.ListarPorEquipamentoId(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -40,7 +39,7 @@ class NotaController
     {
         try { 
             let id = req.params.id;
-            const retorno = await NotaService.getByPk(id);
+            const retorno = await NotaService.SelecionarPorId(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -56,7 +55,7 @@ class NotaController
     {
         try { 
             const nota = req.body;
-            const retorno = await NotaService.create(nota);
+            const retorno = await NotaService.Cadastrar(nota);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -73,7 +72,7 @@ class NotaController
     {
         try { 
             const nota = req.body;
-            const retorno = await NotaService.update(nota);
+            const retorno = await NotaService.Atualizar(nota);
             res.status(200)
             .json({
                 message: 'Nota atualizado com sucesso',
@@ -93,7 +92,7 @@ class NotaController
     {
         try { 
             const id = req.params.id;
-            const retorno = await NotaService.delete(id);
+            const retorno = await NotaService.Deletar(id);
             res.status(200)
             .json({
                 message: 'Nota deletado com sucesso',

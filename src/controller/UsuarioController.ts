@@ -8,7 +8,7 @@ class UsuarioController
     {
         try {
             const { email, senha } = req.body;            
-            const retorno = await UsuarioService.login(email, senha);
+            const retorno = await UsuarioService.Login(email, senha);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +24,7 @@ class UsuarioController
     public async ListarUsuarios(req: Request, res: Response)
     {
         try { 
-            const retorno = await UsuarioService.getAll();
+            const retorno = await UsuarioService.Listar();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -40,7 +40,7 @@ class UsuarioController
     {
         try { 
             let id = req.params.id;
-            const retorno = await UsuarioService.getByEquipamentoFk(id);
+            const retorno = await UsuarioService.ListarPorEquipamento(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -56,7 +56,7 @@ class UsuarioController
     {
         try { 
             let id = req.params.id;
-            const retorno: any = await UsuarioService.getByPk(id);
+            const retorno: any = await UsuarioService.SelecionarPorId(id);
             res.status(200)
             .json(retorno[0]);
         } catch (e: any) {
@@ -72,7 +72,7 @@ class UsuarioController
     {
         try { 
             const usuario = <Usuario>req.body;
-            const retorno = await UsuarioService.create(usuario);
+            const retorno = await UsuarioService.Cadastrar(usuario);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -89,7 +89,7 @@ class UsuarioController
     {
         try { 
             const usuario = <Usuario>req.body;
-            const retorno = await UsuarioService.update(usuario);
+            const retorno = await UsuarioService.Atualizar(usuario);
             res.status(200)
             .json({
                 message: 'Usuário atualizado com sucesso',
@@ -109,7 +109,7 @@ class UsuarioController
     {
         try { 
             const id = req.params.id;
-            const retorno = await UsuarioService.delete(id);
+            const retorno = await UsuarioService.Deletar(id);
             res.status(200)
             .json({
                 message: 'Usuário deletado com sucesso',

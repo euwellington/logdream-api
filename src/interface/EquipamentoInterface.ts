@@ -5,7 +5,7 @@ export interface Equipamento
     ip: string;
     chip: string;
     versao: string;
-    dataCadastro: string;
+    dataCadastro: Date;
 };
 
 export interface EquipamentoRequest extends Partial<Equipamento> {};

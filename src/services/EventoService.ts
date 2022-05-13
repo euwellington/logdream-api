@@ -1,68 +1,62 @@
-import { EventoEntities } from './entites/Evento';
 import EventoRepository from '../repository/EventoRepository';
-import { compare, hash } from 'bcryptjs';
-import { v4 } from 'uuid';
 import { Evento } from '../interface/EventoInterface';
-import { converterDataHora } from '../utils/masks';
+import GenerateGuid from '../tools/GenerateGuid';
 
-var EventoModel = {} as EventoEntities;
-
-EventoModel.getAll = async () =>
+class EventoService
 {
-    try {
-        const retorno = await EventoRepository.Listar();
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
+
+    public async Listar()
+    {
+        try {
+            const retorno = await EventoRepository.Listar();
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
     }
+
+    public async ListarPorEquipamentoId(equipamentoId: string)
+    {
+        try {     
+            const retorno = await EventoRepository.ListarEventoPorEquipamentoId(equipamentoId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async SelecionarPorId(eventoId: string)
+    {
+        try {     
+            const retorno = await EventoRepository.SelecionarEventoPorId(eventoId);
+            return retorno[0];
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+    
+    public async Cadastrar(evento: Evento)
+    {
+        try {     
+            evento.id = GenerateGuid.guid();
+            evento.dataHora = new Date();
+            const retorno = await EventoRepository.Salvar(evento);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Deletar(eventoId: string)
+    {
+        try {     
+            const retorno = await EventoRepository.Deletar(eventoId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
 }
 
-EventoModel.getByPk = async (eventoId: string) =>
-{
-    try {     
-        const retorno = await EventoRepository.SelecionarEventoPorId(eventoId);
-        return retorno[0];
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EventoModel.getByEquipamentoFk = async (equipamentoId: string) =>
-{
-    try {     
-        const retorno = await EventoRepository.ListarEventoPorEquipamentoId(equipamentoId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EventoModel.create = async (evento: Evento) =>
-{
-    try {     
-        let newEvento: Evento = 
-        {
-            id: v4(),
-            usuarioId: evento.usuarioId,
-            equipamentoId: evento.equipamentoId,
-            acionamentoId: evento.acionamentoId,
-            dataHora: converterDataHora(new Date())
-        } 
-        const retorno = await EventoRepository.Salvar(newEvento);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EventoModel.delete = async (eventoId: string) =>
-{
-    try {     
-        const retorno = await EventoRepository.Deletar(eventoId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-export default EventoModel;
+export default new EventoService();

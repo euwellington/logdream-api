@@ -1,69 +1,62 @@
-import { EquipamentoEntities } from './entites/Equipamento';
 import EquipamentoRepository from '../repository/EquipamentoRepository';
-import { compare, hash } from 'bcryptjs';
-import { v4 } from 'uuid';
 import { Equipamento } from '../interface/EquipamentoInterface';
-import { converterDataHora } from '../utils/masks';
+import GenerateGuid from '../tools/GenerateGuid';
 
-var EquipamentoModel = {} as EquipamentoEntities;
-
-EquipamentoModel.getAll = async () =>
+class EquipamentoService
 {
-    try {
-        const retorno = await EquipamentoRepository.Listar();
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
+
+    public async Listar()
+    {
+        try {
+            const retorno = await EquipamentoRepository.Listar();
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
     }
+
+    public async SelecionarPorId(equipamentoId: string)
+    {
+        try {     
+            const retorno = await EquipamentoRepository.SelecionarEquipamentoPorId(equipamentoId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Cadastrar(equipamento: Equipamento)
+    {
+        try {     
+            equipamento.id = GenerateGuid.guid();
+            equipamento.dataCadastro = new Date();
+            const retorno = await EquipamentoRepository.Cadastrar(equipamento);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Atualizar(equipamento: Equipamento)
+    {
+        try {      
+            const retorno = await EquipamentoRepository.Atualizar(equipamento);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Deletar(equipamentoId: string)
+    {
+        try {     
+            const retorno = await EquipamentoRepository.Deletar(equipamentoId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
 }
 
-EquipamentoModel.getByPk = async (EquipamentoId: string) =>
-{
-    try {     
-        const retorno = await EquipamentoRepository.SelecionarEquipamentoPorId(EquipamentoId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EquipamentoModel.create = async (Equipamento: Equipamento) =>
-{
-    try {     
-        let newEquipamento: Equipamento = 
-        {
-            id: v4(),
-            nome: Equipamento.nome,
-            ip: Equipamento.ip,
-            chip: Equipamento.chip,
-            versao: Equipamento.versao,
-            dataCadastro: converterDataHora(new Date())
-        } 
-        const retorno = await EquipamentoRepository.Cadastrar(newEquipamento);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EquipamentoModel.update = async (equipamento: Equipamento) =>
-{
-    try {      
-        const retorno = await EquipamentoRepository.Atualizar(equipamento);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-EquipamentoModel.delete = async (EquipamentoId: string) =>
-{
-    try {     
-        const retorno = await EquipamentoRepository.Deletar(EquipamentoId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-export default EquipamentoModel;
+export default new EquipamentoService();

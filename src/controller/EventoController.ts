@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'; 
 import EventoService from '../services/EventoService';
-import { Usuario } from '../interface/UsuarioInterface';
 import { Evento } from '../interface/EventoInterface';
 
 class EventoController
@@ -8,7 +7,7 @@ class EventoController
     public async ListarEventos(req: Request, res: Response)
     {
         try { 
-            const retorno = await EventoService.getAll();
+            const retorno = await EventoService.Listar();
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -24,7 +23,7 @@ class EventoController
     {
         try { 
             let id = req.params.id;
-            const retorno = await EventoService.getByEquipamentoFk(id);
+            const retorno = await EventoService.ListarPorEquipamentoId(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -40,7 +39,7 @@ class EventoController
     {
         try { 
             let id = req.params.id;
-            const retorno = await EventoService.getByPk(id);
+            const retorno = await EventoService.SelecionarPorId(id);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -56,7 +55,7 @@ class EventoController
     {
         try { 
             const evento = <Evento>req.body;
-            const retorno = await EventoService.create(evento);
+            const retorno = await EventoService.Cadastrar(evento);
             res.status(200)
             .json(retorno);
         } catch (e: any) {
@@ -73,7 +72,7 @@ class EventoController
     {
         try { 
             const id = req.params.id;
-            const retorno = await EventoService.delete(id);
+            const retorno = await EventoService.Deletar(id);
             res.status(200)
             .json({
                 message: 'Evento deletado com sucesso',

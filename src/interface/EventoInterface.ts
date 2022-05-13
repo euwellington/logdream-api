@@ -4,7 +4,7 @@ export interface Evento
     usuarioId: string;
     equipamentoId: string;
     acionamentoId: string;
-    dataHora: string;
+    dataHora: Date;
 };
 
 export interface EventoRequest extends Partial<Evento> {};

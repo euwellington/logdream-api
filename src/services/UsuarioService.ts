@@ -1,113 +1,92 @@
-import { UsuarioEntities } from './entites/Usuario';
 import UsuarioRepository from '../repository/UsuarioRepository';
-import { compare, hash } from 'bcryptjs';
-import { v4 } from 'uuid';
-import jwt from 'jsonwebtoken';
-import { SECRET } from '../env';
-import { Usuario, UsuarioRequest } from '../interface/UsuarioInterface';
-import { converterDataHora } from '../utils/masks';
+import { Usuario } from '../interface/UsuarioInterface';
+import TokenTools from '../tools/TokenTools';
+import GenerateGuid from '../tools/GenerateGuid';
+import CripytoTools from '../tools/CripytoTools';
 
-var UsuarioModel = {} as UsuarioEntities;
-
-UsuarioModel.login = async (email: string, senha: string) =>
+class UsuarioService
 {
-    try {
-        const retorno = await UsuarioRepository.Login();
-        let user = retorno.find((usr) => usr.email === email);
-        if(user && (await compare(senha, user.senha)))
-        {
-            const token = jwt.sign(
-                { user: user },
-                SECRET.token
-            );
-            return token;
+
+    public async Login(email: string, senha: string)
+    {
+        try {
+            const retorno = await UsuarioRepository.Login();
+            let user = retorno.find((usr) => usr.email === email);
+            if(user && CripytoTools.Decode(senha, user.senha))
+            {
+                return TokenTools.Token(user);
+            }
+            throw 'Usuário náo encontrado!'
+        } catch (err: any) {
+            throw err.message;
         }
-        throw 'Usuário náo encontrado!'
-    } catch (err: any) {
-        throw err.message;
     }
+
+    public async Listar()
+    {
+        try {
+            const retorno = await UsuarioRepository.Listar();
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+        
+    public async ListarPorEquipamento(equipamentoId: string)
+    {
+        try {     
+            const retorno = await UsuarioRepository.ListarUsuariosPorEquipamentoId(equipamentoId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async SelecionarPorId(usuarioId: string)
+    {
+        try {     
+            const retorno = await UsuarioRepository.SelecionarUsuarioPorId(usuarioId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Cadastrar(usuario: Usuario)
+    {
+        try {      
+            usuario.id = GenerateGuid.guid();
+            usuario.cpf = usuario.cpf.replace(/[^0-9]/g, '');
+            usuario.senha = (await CripytoTools.Cripytor(usuario.senha)).toString();
+            usuario.dataCadastro = new Date();
+            const retorno = await UsuarioRepository.Cadastrar(usuario);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Atualizar(usuario: Usuario)
+    {
+        try {     
+            usuario.senha = (await CripytoTools.Cripytor(usuario.senha)).toString();
+            const retorno = await UsuarioRepository.Atualizar(usuario);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
+    public async Deletar(usuarioId: string)
+    {
+        try {     
+            const retorno = await UsuarioRepository.Deletar(usuarioId);
+            return retorno;
+        } catch (err: any) {
+            throw err.message;
+        }
+    }
+
 }
 
-UsuarioModel.getAll = async () =>
-{
-    try {
-        const retorno = await UsuarioRepository.Listar();
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-UsuarioModel.getByPk = async (usuarioId: string): Promise<Usuario> =>
-{
-    try {     
-        const retorno = await UsuarioRepository.SelecionarUsuarioPorId(usuarioId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-UsuarioModel.getByEquipamentoFk = async (equipamentoId: string): Promise<Usuario[]> =>
-{
-    try {     
-        const retorno = await UsuarioRepository.ListarUsuariosPorEquipamentoId(equipamentoId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-UsuarioModel.create = async (usuario: Usuario) =>
-{
-    try {
-        let generetePassword = await hash(usuario.senha, 5);
-        let newUser: UsuarioRequest = 
-        {
-            id: v4(),
-            equipamentoId: usuario.equipamentoId,
-            nome: usuario.nome,
-            cpf: usuario.cpf.replace(/[^0-9]/g, ''),
-            email: usuario.email,
-            nascimento: usuario.nascimento,
-            senha: generetePassword,
-            dataCadastro: converterDataHora(new Date())
-        }        
-        const retorno = await UsuarioRepository.Cadastrar(newUser as Usuario);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-UsuarioModel.update = async (usuario: Usuario) =>
-{
-    try {
-        let genereteNewPassword = await hash(usuario.senha, 5);
-        let updateUser: UsuarioRequest = 
-        {
-            id: usuario.id,
-            nome: usuario.nome,
-            cpf: usuario.cpf.replace(/[^0-9]/g, ''),
-            email: usuario.email,
-            nascimento: usuario.nascimento,
-            senha: genereteNewPassword
-        }        
-        const retorno = await UsuarioRepository.Atualizar(updateUser as Usuario);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-UsuarioModel.delete = async (usuarioId: string) =>
-{
-    try {     
-        const retorno = await UsuarioRepository.Deletar(usuarioId);
-        return retorno;
-    } catch (err: any) {
-        throw err.message;
-    }
-}
-
-export default UsuarioModel;
+export default new UsuarioService();
