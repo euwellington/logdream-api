@@ -178,6 +178,16 @@ const Components =
                         type: 'string',
                         example: '192.168.1.0'
                     },
+                    usuario:
+                    {   
+                        type: 'string',
+                        example: 'admin'
+                    },
+                    senha:
+                    {   
+                        type: 'string',
+                        example: 'admin'
+                    },
                     nome:
                     {   
                         type: 'string',

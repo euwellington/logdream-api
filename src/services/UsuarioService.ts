@@ -3,6 +3,7 @@ import { Usuario } from '../interface/UsuarioInterface';
 import TokenTools from '../tools/TokenTools';
 import GenerateGuid from '../tools/GenerateGuid';
 import CripytoTools from '../tools/CripytoTools';
+import DateTimeTool from '../tools/DateTimeTool';
 
 class UsuarioService
 {
@@ -58,7 +59,7 @@ class UsuarioService
             usuario.id = GenerateGuid.guid();
             usuario.cpf = usuario.cpf.replace(/[^0-9]/g, '');
             usuario.senha = (await CripytoTools.Cripytor(usuario.senha)).toString();
-            usuario.dataCadastro = new Date();
+            usuario.dataCadastro = DateTimeTool.currentDateTime();
             const retorno = await UsuarioRepository.Cadastrar(usuario);
             return retorno;
         } catch (err: any) {

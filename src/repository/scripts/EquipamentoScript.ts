@@ -31,6 +31,8 @@ class EquipamentoScript
                     id,
                     nome,
                     ip,
+                    usuario,
+                    senha,
                     chip,
                     versao,
                     dataCadastro
@@ -40,6 +42,8 @@ class EquipamentoScript
                     '${equipamento.id}',
                     '${equipamento.nome}',
                     '${equipamento.ip}',
+                    '${equipamento.usuario}',
+                    '${equipamento.senha}',
                     '${equipamento.chip}',
                     '${equipamento.versao}',
                     '${equipamento.dataCadastro}'
@@ -77,6 +81,8 @@ class EquipamentoScript
                 nome = '${equipamento.nome}',
                 ip = '${equipamento.ip}',
                 chip = '${equipamento.chip}',
+                usuario = '${equipamento.usuario}',
+                senha = '${equipamento.senha}',
                 versao = '${equipamento.versao}'
             WHERE
                 id = '${equipamento.id}'

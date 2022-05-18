@@ -5,9 +5,9 @@ export interface Usuario
     equipamentoId: string;
     cpf: string;
     email: string;
-    nascimento: Date;
+    nascimento: string;
     senha: string;
-    dataCadastro: Date;
+    dataCadastro: string;
 };
 
 export interface UsuarioRequest extends Partial<Usuario> {};

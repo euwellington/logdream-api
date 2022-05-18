@@ -1,6 +1,7 @@
 import EquipamentoRepository from '../repository/NotaRepository';
 import { Nota } from '../interface/NotaInterface';
 import GenerateGuid from '../tools/GenerateGuid';
+import DateTimeTool from '../tools/DateTimeTool';
 
 class NotaService
 {
@@ -39,7 +40,7 @@ class NotaService
     {
         try {     
             nota.id = GenerateGuid.guid();
-            nota.dataHora = new Date();
+            nota.dataHora = DateTimeTool.currentDateTime()
             const retorno = await EquipamentoRepository.Cadastrar(nota);
             return retorno;
         } catch (err: any) {

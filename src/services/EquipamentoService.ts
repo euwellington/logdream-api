@@ -1,6 +1,8 @@
 import EquipamentoRepository from '../repository/EquipamentoRepository';
 import { Equipamento } from '../interface/EquipamentoInterface';
 import GenerateGuid from '../tools/GenerateGuid';
+import moment from 'moment';
+import DateTimeTool from '../tools/DateTimeTool';
 
 class EquipamentoService
 {
@@ -29,7 +31,7 @@ class EquipamentoService
     {
         try {     
             equipamento.id = GenerateGuid.guid();
-            equipamento.dataCadastro = new Date();
+            equipamento.dataCadastro = DateTimeTool.currentDateTime();
             const retorno = await EquipamentoRepository.Cadastrar(equipamento);
             return retorno;
         } catch (err: any) {

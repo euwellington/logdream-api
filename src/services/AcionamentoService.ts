@@ -3,6 +3,7 @@ import { Acionamento } from '../interface/AcionamentoInterface';
 import { enviaAcionamento } from './mqtt/pub';
 import EventoService from './EventoService';
 import GenerateGuid from '../tools/GenerateGuid';
+import DateTimeTool from '../tools/DateTimeTool';
 class AcionamentoService
 {
 
@@ -19,7 +20,7 @@ class AcionamentoService
                 acionamentoId: acionamentoState.id,
                 equipamentoId: acionamentoState.equipamentoId,
                 usuarioId: usuarioId,
-                dataHora: new Date()
+                dataHora: DateTimeTool.currentDateTime()
             })
             if(acionamentoState?.estado)
             {
@@ -45,7 +46,7 @@ class AcionamentoService
                 acionamentoId: acionamentoState.id,
                 equipamentoId: acionamentoState.equipamentoId,
                 usuarioId: usuarioId,
-                dataHora: new Date()
+                dataHora: DateTimeTool.currentDateTime()
             })
             let retorno = await AcionamentoRepository.Acionar({
                 ...acionamentoState!,
@@ -95,7 +96,7 @@ class AcionamentoService
         try {
             acionamento.id = GenerateGuid.guid();
             acionamento.topic = `${acionamento.equipamentoId}/${acionamento.topic}`;
-            acionamento.dataCadastro = new Date();
+            acionamento.dataCadastro = DateTimeTool.currentDateTime();
             const retorno = await AcionamentoRepository.Cadastrar(acionamento);
             return retorno;
         } catch (err: any) {

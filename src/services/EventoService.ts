@@ -1,6 +1,7 @@
 import EventoRepository from '../repository/EventoRepository';
 import { Evento } from '../interface/EventoInterface';
 import GenerateGuid from '../tools/GenerateGuid';
+import DateTimeTool from '../tools/DateTimeTool';
 
 class EventoService
 {
@@ -39,7 +40,7 @@ class EventoService
     {
         try {     
             evento.id = GenerateGuid.guid();
-            evento.dataHora = new Date();
+            evento.dataHora = DateTimeTool.currentDateTime()
             const retorno = await EventoRepository.Salvar(evento);
             return retorno;
         } catch (err: any) {

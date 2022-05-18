@@ -5,7 +5,7 @@ export interface Acionamento
     nome: string;
     estado: boolean;
     topic: string;
-    dataCadastro: Date;
+    dataCadastro: string;
     tipo: number;
     flag: string;
 };
